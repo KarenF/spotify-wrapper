@@ -1,5 +1,5 @@
-export const search = () =>
-  fetch('https://api.spotify.com/v1/search?q=Incubus&type=artist')
+export const search = (query, type) =>
+  fetch(`https://api.spotify.com/v1/search?q=${query}&type=${type}`)
 
 export const searchAlbums = () => {
 
