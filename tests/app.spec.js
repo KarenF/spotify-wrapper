@@ -11,6 +11,18 @@ sinonStubPromise(sinon)
 global.fetch = require('node-fetch')
 
 describe('Spotify Wrapper', () => {
+  let fetchedStub
+  let promise
+
+  beforeEach(() => {
+    fetchedStub = sinon.stub(global, 'fetch')
+    promise = fetchedStub.returnsPromise()
+  })
+
+  afterEach(() => {
+    fetchedStub.restore()
+  })
+
   describe('smoke tests', () => {
     it('should exist the search method', () => {
       expect(search).to.exist
@@ -30,18 +42,6 @@ describe('Spotify Wrapper', () => {
   })
 
   describe('Generic Search', () => {
-    let fetchedStub
-    let promise
-
-    beforeEach(() => {
-      fetchedStub = sinon.stub(global, 'fetch')
-      promise = fetchedStub.returnsPromise()
-    })
-
-    afterEach(() => {
-      fetchedStub.restore()
-    })
-
     it('should call fetch function', () => {
       const artists = search()
       expect(fetchedStub).to.have.been.calledOnce
@@ -52,17 +52,17 @@ describe('Spotify Wrapper', () => {
       context('passing one type', () => {
         const artists = search('Incubus', 'artist')
         expect(fetchedStub).to.have.been
-        .calledWith('https://api.spotify.com/v1/search?q=Incubus&type=artist')
+          .calledWith('https://api.spotify.com/v1/search?q=Incubus&type=artist')
 
         const albums = search('Incubus', 'album')
         expect(fetchedStub).to.have.been
-        .calledWith('https://api.spotify.com/v1/search?q=Incubus&type=album')
+          .calledWith('https://api.spotify.com/v1/search?q=Incubus&type=album')
       })
 
       context('passing more than one type', () => {
         const artistsAndAlbums = search('Incubus', ['artist', 'album'])
         expect(fetchedStub).to.have.been
-        .calledWith('https://api.spotify.com/v1/search?q=Incubus&type=artist,album')
+          .calledWith('https://api.spotify.com/v1/search?q=Incubus&type=artist,album')
       })
     })
 
@@ -71,5 +71,31 @@ describe('Spotify Wrapper', () => {
       const artists = search('Incubus', 'artist')
       //expect(artist.resolveValue).to.be.eql({ body: 'json' })
     })
+  })
+
+  describe('searchArtists', () => {
+    it('should call fetch function', () => {
+      const artists = searchArtists('Incubus')
+      expect(fetchedStub).to.have.been.calledOnce
+    })
+
+    it('should call fetch with the correct URL', () => {
+      const artists = searchArtists('Incubus')
+      expect(fetchedStub).to.have.been
+        .calledWith('https://api.spotify.com/v1/search?q=Incubus&type=artist')
+
+      const artists2 = searchArtists('Muse')
+      expect(fetchedStub).to.have.been
+        .calledWith('https://api.spotify.com/v1/search?q=Muse&type=artist')
+    })
+  })
+
+  describe('searchAlbums', () => {
+    it('should call fetch function', () => {
+      const albums = searchAlbums('album')
+      expect(fetchedStub).to.have.been.calledOnce
+    })
+
+    
   })
 })
