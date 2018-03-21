@@ -124,5 +124,20 @@ describe('Spotify Wrapper', () => {
     })
   })
 
+  describe('searchPlaylists', () => {
+    it('should call fetch function', () => {
+      const playlist = searchPlaylists('Incubus')
+      expect(fetchedStub).to.have.been.calledOnce
+    })
 
+    it('should call fetch with the correct URL', () => {
+      const playlist = searchPlaylists('Incubus')
+      expect(fetchedStub).to.have.been
+        .calledWith('https://api.spotify.com/v1/search?q=Incubus&type=playlist')
+
+      const playlist2 = searchPlaylists('Muse')
+      expect(fetchedStub).to.have.been
+        .calledWith('https://api.spotify.com/v1/search?q=Muse&type=playlist')
+    })
+  })
 })
