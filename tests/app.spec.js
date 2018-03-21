@@ -103,7 +103,26 @@ describe('Spotify Wrapper', () => {
 
       const albums2 = searchAlbums('Muse')
       expect(fetchedStub).to.have.been
-        .calledWith('https://api.spotify.com/v1/search?q=Incubus&type=album')
+        .calledWith('https://api.spotify.com/v1/search?q=Muse&type=album')
     })
   })
+
+  describe('searchTracks', () => {
+    it('should call fetch function', () => {
+      const tracks = searchTracks('Incubus')
+      expect(fetchedStub).to.have.been.calledOnce
+    })
+
+    it('should call fetch with the correct URL', () => {
+      const tracks = searchTracks('Incubus')
+      expect(fetchedStub).to.have.been
+        .calledWith('https://api.spotify.com/v1/search?q=Incubus&type=track')
+
+      const tracks2 = searchTracks('Muse')
+      expect(fetchedStub).to.have.been
+        .calledWith('https://api.spotify.com/v1/search?q=Muse&type=track')
+    })
+  })
+
+
 })

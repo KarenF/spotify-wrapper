@@ -9,7 +9,7 @@ export const searchAlbums = query =>
   search(query, 'album')
 
 export const searchTracks = query =>
-  search(query, 'tracks')
+  search(query, 'track')
 
 export const searchPlaylists = query =>
   search(query, 'playlist')
