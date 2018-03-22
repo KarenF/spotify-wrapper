@@ -3,7 +3,7 @@ import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
 import sinonStubPromise from 'sinon-stub-promise'
 
-import { search, searchAlbums, searchArtists, searchTracks, searchPlaylists } from '../src/app'
+import { search, searchAlbums, searchArtists, searchTracks, searchPlaylists } from '../src/search'
 
 chai.use(sinonChai)
 sinonStubPromise(sinon)
