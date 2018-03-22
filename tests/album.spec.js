@@ -28,6 +28,10 @@ describe('Album', () => {
       expect(getAlbum).to.exist
     })
 
+    it('should have getAlbums method', () => {
+      expect(getAlbums).to.exist
+    })
+
     it('should have getAlbumTracks method', () => {
       expect(getAlbumTracks).to.exist
     })
@@ -76,6 +80,21 @@ describe('Album', () => {
   })
 
   describe('getAlbumTracks', () => {
-    it('should call fetch method')
+    it('should call fetch method', () => {
+      const tracks = getAlbumTracks()
+      expect(fetchedStub).to.have.been.calledOnce
+    })
+
+    it('should call fetch with the correct URL', () => {
+      const tracks = getAlbumTracks('4aawyAB9vmqN3uQ7FjRGTy')
+      expect(fetchedStub).to.have.been
+        .calledWith('https://api.spotify.com/v1/albums/4aawyAB9vmqN3uQ7FjRGTy/tracks')
+    })
+
+    it('should return the correct data from Promise', () => {
+      promise.resolves({ album: 'name' })
+      const tracks = getAlbumTracks('4aawyAB9vmqN3uQ7FjRGTy')
+      expect(tracks.resolveValue).to.be.eql({ album: 'name' })
+    })
   })
 })
