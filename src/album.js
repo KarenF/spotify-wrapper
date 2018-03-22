@@ -1,11 +1,13 @@
+import { API_URL } from './config'
+
 export const getAlbum = id =>
-  fetch(`https://api.spotify.com/v1/albums/${id}`)
+  fetch(`${API_URL}/albums/${id}`)
     .then(data => data.json())
 
 export const getAlbums = id =>
-  fetch(`https://api.spotify.com/v1/albums/?ids=${id}`)
+  fetch(`${API_URL}/albums/?ids=${id}`)
     .then(data => data.json())
 
 export const getAlbumTracks = id =>
-  fetch(`https://api.spotify.com/v1/albums/${id}/tracks`)
+  fetch(`${API_URL}/albums/${id}/tracks`)
     .then(data => data.json())
