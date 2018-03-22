@@ -11,8 +11,8 @@
     "test:coverage": "nyc npm test"
   },
   "nyc": {
-    "functions": 0,
-    "lines": 0,
+    "functions": 80,
+    "lines": 80,
     "check-coverage": true,
     "reporter": [
       "text",
@@ -51,6 +51,7 @@
     "sinon-stub-promise": "^4.0.0"
   },
   "dependencies": {
+    "babel-cli": "^6.26.0",
     "eslint-config-airbnb": "^16.1.0",
     "express": "^4.16.2"
   }
