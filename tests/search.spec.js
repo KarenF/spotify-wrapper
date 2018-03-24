@@ -69,7 +69,7 @@ describe('Search', () => {
     it('should return the JSON Data from the Promise', () => {
       promise.resolves({ body: 'json' })
       const artists = search('Incubus', 'artist')
-      //expect(artist.resolveValue).to.be.eql({ body: 'json' })
+      expect(artists.resolveValue).to.be.eql({ body: 'json' })
     })
   })
 
